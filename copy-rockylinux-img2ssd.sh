@@ -73,7 +73,7 @@ logmsg "Modify PARTUUID of 'cmdline.txt'"
 BPU=$(get_partuuid /dev/sda1)
 
 sudo mount /dev/sda1 /mnt
-sudo sed -i "s/PARTUUID=.*-02/PARTUUID=${BPU}-02/" /mnt/cmdline.txt
+sudo sed -i "s/PARTUUID=.*-03/PARTUUID=${BPU}-02/" /mnt/cmdline.txt
 sudo sed -i 's/$/ selinux=0/' /mnt/cmdline.txt
 sudo umount /mnt
 
@@ -83,8 +83,8 @@ RUU=$(get_uuid /dev/sda2)
 
 sudo mount /dev/sda2 /mnt
 
-sudo sed -i "/ ext4 /s/^UUID=.................................... /${RUU}/" /mnt/etc/fstab
-sudo sed -i "/fat /s/^UUID=......... /${BUU}/" /mnt/etc/fstab
+sudo sed -i "/ ext4 /s/^UUID=.................................... /UUID=${RUU} /" /mnt/etc/fstab
+sudo sed -i "/fat /s/^UUID=......... /UUID=${BUU} /" /mnt/etc/fstab
 sudo sed -i "/ swap /s/^/## /" /mnt/etc/fstab
 
 sudo umount /mnt
