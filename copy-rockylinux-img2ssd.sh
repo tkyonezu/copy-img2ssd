@@ -60,7 +60,7 @@ sudo mkdir /var/tmp/mnt2
 sudo mount /dev/mapper/loop0p1 /mnt
 sudo mount ${SSDDEV}1 /var/tmp/mnt2
 
-sudo rsync -avh --info=progress2 /mnt/ /var/tmp/mnt2/
+sudo rsync -avhP /mnt/ /var/tmp/mnt2/
 
 sudo umount /var/tmp/mnt2 /mnt
 
@@ -68,7 +68,7 @@ logmsg "Copy root filesystem to SSD"
 sudo mount /dev/mapper/loop0p3 /mnt
 sudo mount ${SSDDEV}2 /var/tmp/mnt2
 
-sudo rsync -avh --info=progress2 --exclude /mnt/lost+found /mnt/ /var/tmp/mnt2/
+sudo rsync -avhP --exclude /mnt/lost+found /mnt/ /var/tmp/mnt2/
 
 logmsg "Unmount Rocky Linux image"
 sudo umount /var/tmp/mnt2 /mnt
@@ -95,7 +95,7 @@ sudo sed -i "/ swap /s/^/## /" /mnt/etc/fstab
 
 sudo umount /mnt
 
-sudo rm -fr /var/tmp/mnt2
+sudo rmdir /var/tmp/mnt2
 
 logmsg "End of Copy Rocky Linux to SSD"
 
