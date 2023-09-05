@@ -97,7 +97,7 @@ sudo umount /mnt
 
 sudo rmdir /var/tmp/mnt2
 
-if [ -f usr-data ]; then
+if [ -f user-data ]; then
   logmsg "Setup user-data for cloud-init"
   sudo mount ${SSDDEV}1 /mnt
   sudo cp user-data /mnt/user-data
