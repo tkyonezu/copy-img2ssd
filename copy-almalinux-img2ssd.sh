@@ -6,7 +6,7 @@ BOOTSZ=512M
 ALMA_URL="https://repo.almalinux.org/rpi/9/images/"
 ALMA_IMG="AlmaLinux-9-RaspberryPi-GNOME-latest.aarch64.raw"
 
-logmsg() {
+function logmsg() {
   echo ">>> $1"
 }
 

@@ -6,7 +6,7 @@ BOOTSZ=512M
 ROCKY_URL="https://dl.rockylinux.org/pub/sig/9/altarch/aarch64/images/"
 ROCKY_IMG="RockyLinuxRpi_9-latest.img"
 
-logmsg() {
+function logmsg() {
   echo ">>> $1"
 }
 
