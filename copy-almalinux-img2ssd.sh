@@ -6,7 +6,7 @@ BOOTSZ=512M
 ALMA_URL="https://repo.almalinux.org/rpi/9/images/"
 ALMA_IMG="AlmaLinux-9-RaspberryPi-GNOME-latest.aarch64.raw"
 
-function logmsg() {
+logmsg() {
   echo ">>> $1"
 }
 
@@ -27,6 +27,13 @@ function get_uuid() {
 }
 
 logmsg "Start Copy AlmaLinux to SSD"
+
+CURDIR=$(pwd)
+
+if ! which rsync >/dev/null 2>/dev/null; then
+  logmsg "Install prerequisite command"
+  sudo dnf install -y rsync
+fi
 
 logmsg "Create partitions"
 sudo parted ${SSDDEV} mklabel msdos
@@ -91,11 +98,12 @@ sudo mount ${SSDDEV}2 /mnt
 
 sudo sed -i "/ ext4 /s/^UUID=.................................... /UUID=${RUU} /" /mnt/etc/fstab
 sudo sed -i "/fat /s/^UUID=......... /UUID=${BUU} /" /mnt/etc/fstab
-sudo sed -i "/ swap /s/^/## /" /mnt/etc/fstab
 
 sudo umount /mnt
 
 sudo rmdir /var/tmp/mnt2
+
+cd ${CURDIR}
 
 if [ -f user-data ]; then
   logmsg "Setup user-data for cloud-init"
