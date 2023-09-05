@@ -43,7 +43,7 @@ sudo e2label ${SSDDEV}2 "_/"
 
 cd /var/tmp
 
-if [ ! -f RockyLinuxRpi_9-latest.img ]; then
+if [ ! -f ${ROCKY_IMG} ]; then
   logmsg "Get Latest Rocky Linux image"
   curl -L ${ROCKY_URL}${ROCKY_IMG}.xz -o ${ROCKY_IMG}.xz
 
